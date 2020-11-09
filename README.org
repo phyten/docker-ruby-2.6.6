@@ -1,0 +1,5 @@
+* Docker-ruby-2.6.6
+** dip
+#+begin_src
+brew install dip
+#+end_src

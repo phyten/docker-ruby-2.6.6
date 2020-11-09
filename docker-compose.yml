@@ -1,0 +1,26 @@
+version: '3.5'
+
+services:
+  base: &app_base
+    image: phyten/ruby-jemalloc:2.6.6
+    stdin_open: true
+    environment:
+      BUNDLE_APP_CONFIG: ./.bundle
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+    volumes:
+      - .:/app
+      - bundle:/app/vendor/bundle
+
+  app:
+    <<: *app_base
+
+networks:
+  dockern:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.239.0/16
+          gateway: 172.16.239.1
+
+volumes:
+  bundle:
